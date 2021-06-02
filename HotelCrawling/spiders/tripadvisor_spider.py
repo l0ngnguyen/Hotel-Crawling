@@ -5,44 +5,15 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from .cleaning import clean_text, clean_text_list, get_date_from_string
-from selenium.common.exceptions import NoSuchElementException, NoSuchAttributeException
+from .utils import clean_text, clean_text_list, get_date_from_string, get_element_by_selector
 import time
-
-def find_element_by_css_selector(driver, selector, find_more=False, attribute=None):
-    """find the element by css selector and get the information that we need
-
-    Args:
-        driver (WebDriver): WebDriver selenium that we want to extract
-        selector (str): the css selector 
-        find_more (bool, optional): find more elements or just one. Defaults to False.
-        attribute (string, optional): if attribute is None, get the text from element or get text from that attribute. Defaults to None.
-
-    Returns:
-        list, str or None: 
-    """    
-    try:
-        if find_more:
-            elements = driver.find_elements_by_css_selector(selector)
-            if attribute:
-                return [e.get_attribute(attribute) for e in elements]
-            else:
-                return [e.text for e in elements]
-        else:
-            element = driver.find_element_by_css_selector(selector)
-            return element.get_attribute(attribute) if attribute else element.text
-
-    except (NoSuchElementException, NoSuchAttributeException):
-        return None
-    except Exception:
-        return None 
 
 
 class TripAdvisorSpider(scrapy.Spider):
     name = 'tripadvisor'
     allowed_domains = ['tripadvisor.com.vn']
     start_urls = [
-        
+
     ]
     citys = ['Hồ Chí Minh', 'Hà Nội', 'Đà Nẵng', 'Đà Lạt']
 
@@ -70,21 +41,21 @@ class TripAdvisorSpider(scrapy.Spider):
             driver = webdriver.Chrome('chromedriver')
             driver.get(url)
 
-            city_name = 
+            city_name =
             print(f'@crawling_in {city_name}')
 
-            check_in = 
-            check_out = 
+            check_in =
+            check_out =
 
-            n_pages = 
+            n_pages =
             n_pages = int(n_pages.strip())
 
             for _ in range(n_pages-1):
                 # get the html elements that contain infomation of hotels
-                hotel_elements = 
+                hotel_elements =
                 for hotel_element in hotel_elements:
-                    hotel_link = 
-                    price = 
+                    hotel_link =
+                    price =
 
                     yield scrapy.Request(url=hotel_link,
                                          callback=self.parse_detail,
